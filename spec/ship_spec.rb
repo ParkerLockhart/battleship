@@ -13,4 +13,10 @@ describe Ship do
     end
   end
 
+  describe '#hit' do
+    it 'depletes the ships health' do
+      cruiser = Ship.new("Cruiser", 3)
+      expect(cruiser.hit).to eq(nil)
+    end
+  end
 end
