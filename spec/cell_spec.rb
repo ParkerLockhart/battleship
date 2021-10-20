@@ -46,4 +46,53 @@ RSpec.describe Cell do
     cell.fire_upon
     expect(cruiser.health).to eq(2)
   end
+
+  describe '#render' do
+    it 'shows a . for an unhit and empty cell' do
+      cell = Cell.new("B4")
+      expect(cell.render).to eq(".")
+    end
+
+    it 'shows an M for a miss on an empty cell' do
+      cell = Cell.new("B4")
+      cell.fire_upon
+      expect(cell.render).to eq("M")
+    end
+
+    it 'shows a . for an unhit cell with a ship' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("cruiser", 3)
+      cell.place_ship(cruiser)
+
+      expect(cell.render).to eq(".")
+    end
+
+    it 'shows a S for an unhit cell with a ship and the reveal code' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("cruiser", 3)
+      cell.place_ship(cruiser)
+
+      expect(cell.render(true)).to eq("S")
+    end
+
+    it 'shows an H for a hit cell with a ship' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("cruiser", 3)
+      cell.place_ship(cruiser)
+      cell.fire_upon
+      expect(cell.render(true)).to eq("H")
+    end
+
+    it 'shows an X for a sunken ship' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("cruiser", 3)
+      cell.place_ship(cruiser)
+      cell.fire_upon
+      cruiser.hit
+
+      expect(cell.render(true)).to eq("H")
+      cruiser.hit
+      expect(cell.render(true)).to eq("X")
+    end
+  end
 end
