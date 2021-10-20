@@ -29,4 +29,21 @@ RSpec.describe Cell do
     expect(cell.ship).to eq(cruiser)
     expect(cell.empty?).to eq(false)
   end
+
+  it 'tracks being fired upon' do
+    cell = Cell.new("B4")
+    expect(cell.fired_upon?).to eq(false)
+    cell.fire_upon
+    expect(cell.fired_upon?).to eq(true)
+  end
+
+  it 'damages a ship when the cell is fired upon' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("cruiser", 3)
+    cell.place_ship(cruiser)
+
+    expect(cruiser.health).to eq(3)
+    cell.fire_upon
+    expect(cruiser.health).to eq(2)
+  end
 end
