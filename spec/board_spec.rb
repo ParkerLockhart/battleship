@@ -7,7 +7,7 @@ RSpec.describe Board do
     board = Board.new
     expect(board).to be_instance_of(Board)
   end
-
+  
   it 'has cells' do
     board = Board.new
     expect(board.cells).to be_kind_of(Hash)
@@ -38,6 +38,14 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["A1", "C1"])).to eq(false)
     expect(board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
   end
+
+  #not diagonal test
+
+  #not overlapping
+
+  #place ship test
+
+  #render test
 
 
 end
