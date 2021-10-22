@@ -45,10 +45,8 @@ class Board
 
 
   def adjacent?(cell_1, cell_2)
-    # cell_1 is like "A1"
-    # cell_2 is like "A2"
-    # is the absolute value of the difference between the cell numbers equal to 1?
-    row_adjacent?(cell_1, cell_2) || column_adjacent?(cell_1, cell_2)
+
+    row_adjacent?(cell_1, cell_2) ^ column_adjacent?(cell_1, cell_2)
 
   end
 

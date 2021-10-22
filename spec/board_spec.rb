@@ -121,9 +121,12 @@ RSpec.describe Board do
 
   it 'reports if the coordinates are diagonal' do
     cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
     board = Board.new
     expect(board.valid_placement?(cruiser, ["A1", "B2", "C3"])).to eq(false)
+    expect(board.valid_placement?(submarine, ["B2", "C3"])).to eq(false)
   end
+
 
 
 end
