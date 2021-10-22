@@ -119,13 +119,11 @@ RSpec.describe Board do
     expect(board.same_row?(["A1", "A3", "B4"])).to eq(false)
   end
 
-  #not diagonal test
-
-  #not overlapping
-
-  #place ship test
-
-  #render test
+  it 'reports if the coordinates are diagonal' do
+    cruiser = Ship.new("Cruiser", 3)
+    board = Board.new
+    expect(board.valid_placement?(cruiser, ["A1", "B2", "C3"])).to eq(false)
+  end
 
 
 end
