@@ -29,7 +29,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    (coordinates.size == ship.length) # &&
+    (coordinates.size == ship.length) && linear?(coordinates.sort)
   end
 #ideas for check if coordinates are consecutive:
 #split each element in coordinates array into row, column?
