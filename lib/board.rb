@@ -1,4 +1,5 @@
 require './lib/cell'
+require './lib/ship'
 
 class Board
   attr_reader :cells
@@ -31,18 +32,6 @@ class Board
   def valid_placement?(ship, coordinates)
     (coordinates.size == ship.length) && linear?(coordinates.sort)
   end
-#ideas for check if coordinates are consecutive:
-#split each element in coordinates array into row, column?
-
-#row = "A".."D"
-#column = 1..4
-#row.to_a
-#column.to_a.ord
-#check if rows = consecutive
-#OR columns = consecutive with each_cons(ship.length).all? maybe?
-
-#.sort to put coordinates in order
-
 
   def adjacent?(cell_1, cell_2)
 
@@ -82,6 +71,13 @@ class Board
       (adjacent?(coordinates[0], coordinates[1]) && adjacent?(coordinates[1], coordinates[2])) && (same_row?(coordinates) || same_column?(coordinates))
     end
 
+  end
+
+  def place(ship,coordinates)
+    coordinates.each do |cell|
+      cell = @cells[cell]
+      cell.place_ship(ship)
+    end
   end
 
 
