@@ -1,5 +1,5 @@
 require './lib/cell'
-require './lib/ship'
+
 
 class Board
   attr_reader :cells
@@ -80,5 +80,12 @@ class Board
     end
   end
 
+  def render
+    "  1 2 3 4 \n" +
+    "A . . . . \n" +
+    "B . . . . \n" +
+    "C . . . . \n" +
+    "D . . . . \n"
+  end
 
 end

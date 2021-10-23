@@ -144,4 +144,14 @@ RSpec.describe Board do
     cell_3 = board.cells["A3"]
     expect(cell_3.ship).to eq(cell_2.ship)
   end
+
+  it 'returns a visual of the game board' do
+    board = Board.new
+    expect(board.render).to eq("  1 2 3 4 \n" +
+       "A . . . . \n" +
+       "B . . . . \n" +
+       "C . . . . \n" +
+       "D . . . . \n")
+  end
+
 end
