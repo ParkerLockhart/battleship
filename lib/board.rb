@@ -1,8 +1,9 @@
 require './lib/cell'
-
+require './lib/ship'
 
 class Board
-  attr_reader :cells
+  attr_reader :ship, :fired_upon
+  attr_accessor :render, :cells
 
   def initialize
     @cells = {
@@ -80,12 +81,18 @@ class Board
     end
   end
 
-  def render
-    "  1 2 3 4 \n" +
-    "A . . . . \n" +
-    "B . . . . \n" +
-    "C . . . . \n" +
-    "D . . . . \n"
-  end
+  def render(reveal = false)
+     rendered = "  1 2 3 4 "
+     @cells.each_value do |cell|
+       rendered += (cell.render(true) + " ")
+     end
+     rendered.insert(10, "\nA ")
+     rendered.insert(21, "\nB ")
+     rendered.insert(32, "\nC ")
+     rendered.insert(43, "\nD ")
+     rendered.insert(54, "\n")
+   end
+
+
 
 end

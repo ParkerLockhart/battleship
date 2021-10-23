@@ -154,4 +154,33 @@ RSpec.describe Board do
        "D . . . . \n")
   end
 
+  it 'shows where the ship is on the board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+  expect(board.render(true)).to eq("  1 2 3 4 \n" +
+    "A S S S . \n" +
+    "B . . . . \n" +
+    "C . . . . \n" +
+    "D . . . . \n")
+  end
+
+  it 'shows where if a ship is hit' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["C2", "C3", "C4"])
+    cell_1 = board.cells["C2"]
+    cell_2 = board.cells["C3"]
+    cell_3 = board.cells["C4"]
+    cell_3.fire_upon
+  expect(board.render(true)).to eq("  1 2 3 4 \n" +
+    "A . . . . \n" +
+    "B . . . . \n" +
+    "C . S S H \n" +
+    "D . . . . \n")
+  end
+
 end
