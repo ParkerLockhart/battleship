@@ -119,13 +119,68 @@ RSpec.describe Board do
     expect(board.same_row?(["A1", "A3", "B4"])).to eq(false)
   end
 
-  #not diagonal test
+  it 'reports if the coordinates are diagonal' do
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board = Board.new
+    expect(board.valid_placement?(cruiser, ["A1", "B2", "C3"])).to eq(false)
+    expect(board.valid_placement?(submarine, ["B2", "C3"])).to eq(false)
+  end
 
-  #not overlapping
+  it 'reports that placement is vailed, once more' do
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board = Board.new
+    expect(board.valid_placement?(submarine, ["A1", "A2"])).to eq(true)
+    expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
+  end
 
-  #place ship test
+  it 'places ship in cells on board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+    expect(cell_3.ship).to eq(cell_2.ship)
+  end
 
-  #render test
+  it 'returns a visual of the game board' do
+    board = Board.new
+    expect(board.render).to eq("  1 2 3 4 \n" +
+       "A . . . . \n" +
+       "B . . . . \n" +
+       "C . . . . \n" +
+       "D . . . . \n")
+  end
 
+  it 'shows where the ship is on the board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+  expect(board.render(true)).to eq("  1 2 3 4 \n" +
+    "A S S S . \n" +
+    "B . . . . \n" +
+    "C . . . . \n" +
+    "D . . . . \n")
+  end
+
+  it 'shows where if a ship is hit' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["C2", "C3", "C4"])
+    cell_1 = board.cells["C2"]
+    cell_2 = board.cells["C3"]
+    cell_3 = board.cells["C4"]
+    cell_3.fire_upon
+  expect(board.render(true)).to eq("  1 2 3 4 \n" +
+    "A . . . . \n" +
+    "B . . . . \n" +
+    "C . S S H \n" +
+    "D . . . . \n")
+  end
 
 end

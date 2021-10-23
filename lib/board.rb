@@ -1,7 +1,9 @@
 require './lib/cell'
+require './lib/ship'
 
 class Board
-  attr_reader :cells
+  attr_reader :ship, :fired_upon
+  attr_accessor :render, :cells
 
   def initialize
     @cells = {
@@ -31,24 +33,10 @@ class Board
   def valid_placement?(ship, coordinates)
     (coordinates.size == ship.length) && linear?(coordinates.sort)
   end
-#ideas for check if coordinates are consecutive:
-#split each element in coordinates array into row, column?
-
-#row = "A".."D"
-#column = 1..4
-#row.to_a
-#column.to_a.ord
-#check if rows = consecutive
-#OR columns = consecutive with each_cons(ship.length).all? maybe?
-
-#.sort to put coordinates in order
-
 
   def adjacent?(cell_1, cell_2)
-    # cell_1 is like "A1"
-    # cell_2 is like "A2"
-    # is the absolute value of the difference between the cell numbers equal to 1?
-    row_adjacent?(cell_1, cell_2) || column_adjacent?(cell_1, cell_2)
+
+    row_adjacent?(cell_1, cell_2) ^ column_adjacent?(cell_1, cell_2)
 
   end
 
@@ -85,6 +73,26 @@ class Board
     end
 
   end
+
+  def place(ship,coordinates)
+    coordinates.each do |cell|
+      cell = @cells[cell]
+      cell.place_ship(ship)
+    end
+  end
+
+  def render(reveal = false)
+     rendered = "  1 2 3 4 "
+     @cells.each_value do |cell|
+       rendered += (cell.render(true) + " ")
+     end
+     rendered.insert(10, "\nA ")
+     rendered.insert(21, "\nB ")
+     rendered.insert(32, "\nC ")
+     rendered.insert(43, "\nD ")
+     rendered.insert(54, "\n")
+   end
+
 
 
 end
