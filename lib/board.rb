@@ -31,13 +31,13 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    (coordinates.size == ship.length) && linear?(coordinates.sort)
+    (coordinates.size == ship.length) &&
+    linear?(coordinates.sort) &&
+    (not_overlapping(coordinates).all? == true)
   end
 
   def adjacent?(cell_1, cell_2)
-
     row_adjacent?(cell_1, cell_2) ^ column_adjacent?(cell_1, cell_2)
-
   end
 
   def row_adjacent?(cell_1, cell_2)
@@ -71,7 +71,6 @@ class Board
     else
       (adjacent?(coordinates[0], coordinates[1]) && adjacent?(coordinates[1], coordinates[2])) && (same_row?(coordinates) || same_column?(coordinates))
     end
-
   end
 
   def place(ship,coordinates)
@@ -79,6 +78,15 @@ class Board
       cell = @cells[cell]
       cell.place_ship(ship)
     end
+  end
+
+  def not_overlapping(coordinates)
+    cellsempty = Array.new
+    coordinates.each do |cell|
+      cell = @cells[cell]
+      cellsempty << cell.empty?
+    end
+    cellsempty
   end
 
   def render(reveal = false)
