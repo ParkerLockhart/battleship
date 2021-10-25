@@ -14,8 +14,5 @@ RSpec.describe Gameplay do
     expect(gameplay.greeting).to eq("Enter p to play. Enter q to quit.")
   end
 
-  
-
-
 
 end
