@@ -9,5 +9,10 @@ RSpec.describe Player do
     player = Player.new
     expect(player).to be_instance_of(Player)
   end
-  
+
+  it 'prompts the player to place their ships' do
+  player = Player.new
+  require "pry"; binding.pry
+  expect(player.setup).to eq(prompt)
+  end
 end
