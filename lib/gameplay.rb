@@ -8,8 +8,8 @@ class Gameplay
   end
 
   def greeting
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
+    p "Welcome to BATTLESHIP!"
+    p "Enter p to play. Enter q to quit."
   end
 
   def start
@@ -33,7 +33,7 @@ class Gameplay
     playerboard = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    
+
   end
 
   def end_game
