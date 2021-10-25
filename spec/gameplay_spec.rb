@@ -11,15 +11,7 @@ RSpec.describe Gameplay do
 
   it '#greeting' do
     gameplay = Gameplay.new
-    expect(gameplay.greeting).to eq("Welcome to BATTLESHIP" + "Enter p to play. Enter q to quit.")
-  end
-
-  it '#start' do
-
-  end
-
-  it '#setup' do
-
+    expect(gameplay.greeting).to eq("Enter p to play. Enter q to quit.")
   end
 
 
