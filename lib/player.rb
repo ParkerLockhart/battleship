@@ -28,12 +28,12 @@ class Player
 
     p "Enter the squares for the Cruiser (3 spaces):"
     user_placement = gets.to_s.chomp
-    if board.valid_placement? == false
+    if board.valid_placement?(ship, coordinates) == false
       p "Invalid placement, try again."
     else board.valid_placement? == true
       board.place(@cruiser, user_placement.split)
     end
-  
+
   end
 
 end
