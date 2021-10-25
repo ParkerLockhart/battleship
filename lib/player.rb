@@ -1,3 +1,8 @@
+require './lib/cell'
+require './lib/ship'
+require './lib/board'
+require './lib/gameplay'
+
 class Player
   attr_reader :board, :cruiser, :submarine
   def initialize
@@ -15,6 +20,11 @@ class Player
       B . . . .
       C . . . .
       D . . . ."
+    p ship_placement
+  end
+
+  def ship_placement
     
   end
+
 end

@@ -12,7 +12,11 @@ RSpec.describe Player do
 
   it 'prompts the player to place their ships' do
   player = Player.new
-  require "pry"; binding.pry
+
   expect(player.setup).to eq(prompt)
+  end
+
+  it 'lets the player place three ships on the board' do
+    
   end
 end
