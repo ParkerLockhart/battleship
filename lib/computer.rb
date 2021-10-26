@@ -1,3 +1,6 @@
+
+class Computer
+  
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
@@ -35,4 +38,5 @@ class Computer
 
     board.place(@submarine, possible.sample)
   end 
+
 end

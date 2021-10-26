@@ -12,23 +12,61 @@ class Player
   end
 
   def setup
-    p "I have laid out my ships on the grid."
-    p "You now need to lay out your two ships."
-    p "The Cruiser is three units long and the Submarine is two units long."
-    p "    1 2 3 4"
-    p "  A . . . ."
-    p "  B . . . ."
-    p "  C . . . ."
-    p "  D . . . ."
-    p "Enter the squares for the Cruiser (3 spaces):"
-    cruiser_coordinates = gets.to_s.chomp
+    prompt = "I have laid out my ships on the grid.
+    You now need to lay out your two ships.
+    The Cruiser is three units long and the Submarine is two units long.
+        1 2 3 4
+      A . . . .
+      B . . . .
+      C . . . .
+      D . . . ."
+    puts prompt
+    puts ship_placement
+  end
 
-    if board.valid_placement?(@cruiser, cruiser_coordinates) == false
-      p "Those are invalid coordinates. Please try again:"
-    else board.valid_placement? == true
-      board.place(@cruiser, cruiser_coordinates)
+  def ship_placement
+    cruiser_placed = false
+
+    until cruiser_placed
+      puts "Enter the squares for the Cruiser (3 spaces):"
+      user_placement = gets.to_s.chomp # A1 A2 A3
+      ship = Ship.new("Cruiser", 3)
+      coordinates = user_placement.split
+
+      if board.valid_placement?(ship, coordinates)
+        board.place(ship, coordinates)
+        cruiser_placed = true
+      else
+        puts "Invalid placement, try again."
+      end
+
+    puts board.render(true)
+
+    submarine_placed = false
+    until submarine_placed
+      puts "Enter the squares for the Submarine (2 spaces):"
+      user_placement = gets.to_s.chomp # A1 A2 A3
+      ship = Ship.new("Submarine", 2)
+      coordinates = user_placement.split
+
+      if board.valid_placement?(ship, coordinates)
+        board.place(ship, coordinates)
+        submarine_placed = true
+      else
+        puts "Invalid placement, try again."
+      end
+
+      puts "Ready to begin. Your board looks like this:"
+      puts ""
+      puts board.render(true)
     end
 
+
+  end
+
+  def game_over?
+    board.ships.all?{|ship| ship.sunk?}
+    
   end
 
 end

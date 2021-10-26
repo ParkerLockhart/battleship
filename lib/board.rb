@@ -2,7 +2,7 @@ require './lib/cell'
 require './lib/ship'
 
 class Board
-  attr_reader :ship, :fired_upon
+  attr_reader :ships, :fired_upon
   attr_accessor :render, :cells
 
   def initialize
@@ -24,10 +24,16 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
       }
+
+      @ships = []
   end
 
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
+  end
+
+  def fire_upon(coordinate)
+    @cells[coordinate].fire_upon
   end
 
   def valid_placement?(ship, coordinates)
@@ -78,6 +84,8 @@ class Board
       cell = @cells[cell]
       cell.place_ship(ship)
     end
+
+    @ships << ship
   end
 
   def not_overlapping(coordinates)
