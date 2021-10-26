@@ -8,8 +8,3 @@ require './lib/player'
 game1 = Gameplay.new
 game1.greeting
 game1.start
-computer = Computer.new
-player = Player.new
-computer.setup_cruiser
-computer.setup_submarine
-player.setup
