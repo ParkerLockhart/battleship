@@ -1,10 +1,6 @@
-
-class Computer
-  
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-
 
 class Computer
   attr_reader :board, :cruiser, :submarine
@@ -13,6 +9,11 @@ class Computer
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
+  end
+
+  def setup
+    setup_cruiser
+    setup_submarine
   end
 
   def setup_cruiser
@@ -37,6 +38,10 @@ class Computer
     end
 
     board.place(@submarine, possible.sample)
-  end 
+  end
 
+  def display_board
+    puts "=============COMPUTER BOARD============="
+    puts board.render
+  end  
 end

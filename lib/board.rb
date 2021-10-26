@@ -99,16 +99,24 @@ class Board
 
   def render(reveal = false)
      rendered = "  1 2 3 4 "
-     @cells.each_value do |cell|
-       rendered += (cell.render(true) + " ")
-     end
-     rendered.insert(10, "\nA ")
-     rendered.insert(21, "\nB ")
-     rendered.insert(32, "\nC ")
-     rendered.insert(43, "\nD ")
-     rendered.insert(54, "\n")
-   end
-
-
-
+     if reveal
+       @cells.each_value do |cell|
+         rendered += (cell.render(true) + " ")
+      end
+       rendered.insert(10, "\nA ")
+       rendered.insert(21, "\nB ")
+       rendered.insert(32, "\nC ")
+       rendered.insert(43, "\nD ")
+       rendered.insert(54, "\n")
+    else
+      @cells.each_value do |cell|
+        rendered += (cell.render + " ")
+      end
+      rendered.insert(10, "\nA ")
+      rendered.insert(21, "\nB ")
+      rendered.insert(32, "\nC ")
+      rendered.insert(43, "\nD ")
+      rendered.insert(54, "\n")
+    end
+  end
 end
