@@ -1,23 +1,18 @@
 require './lib/board'
 
 class Gameplay
-  attr_reader :player
+  attr_reader :player, :computer
 
   def initialize
-    #computer = Computer.new
+    @computer = Computer.new
     @player = Player.new
-    #computer.setup_cruiser
-    #computer.setup_submarine
-
-  end
-
-  def greeting
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
   end
 
   def start
-    user_input = gets.to_s.chomp
+    p "Welcome to BATTLESHIP"
+    p "Enter p to play. Enter q to quit."
+    user_input = gets.chomp
+
     if user_input == "p"
       puts "Lets go!"
       player.setup
@@ -26,6 +21,7 @@ class Gameplay
       end_game
     else
       puts "Error: invalid input. Please enter p to play or q to quit."
+      start
     end
   end
 
@@ -70,6 +66,7 @@ class Gameplay
 
   def end_game
     puts "See ya another time."
+    start
   end
 
 end

@@ -39,7 +39,6 @@ class Player
       else
         puts "Invalid placement, try again."
       end
-    end
 
     puts board.render(true)
 

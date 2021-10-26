@@ -6,5 +6,4 @@ require './lib/computer'
 require './lib/player'
 
 game1 = Gameplay.new
-game1.greeting
 game1.start
