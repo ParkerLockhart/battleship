@@ -2,7 +2,7 @@ require './lib/ship'
 
 class Cell
   attr_reader :coordinate, :ship, :fired_upon
-  
+  attr_accessor :render
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -11,11 +11,7 @@ class Cell
   end
 
   def empty?
-    if ship
-      false
-    else
-      true
-    end
+    !ship
   end
 
   def place_ship(input_ship)
