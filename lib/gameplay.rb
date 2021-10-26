@@ -34,10 +34,20 @@ class Gameplay
     puts "Let's play!"
     puts ""
 
-    #puts computer.board.render
-    puts player.board.render(true)
+    end_game = false
 
-    player_shoots
+    until end_game
+      #puts computer.board.render
+      puts player.board.render(true)
+
+      player_shoots
+      # computer_shoots
+
+      if player.game_over?
+        end_game = true
+        puts "Game Over. I won!"
+      end
+    end
 
   end
 
@@ -54,7 +64,8 @@ class Gameplay
       end
     end
 
-
+    # Then we need to shoot the cell
+    player.board.fire_upon(user_input)
   end
 
   def end_game

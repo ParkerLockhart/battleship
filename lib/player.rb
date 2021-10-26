@@ -65,4 +65,9 @@ class Player
 
   end
 
+  def game_over?
+    board.ships.all?{|ship| ship.sunk?}
+    
+  end
+
 end
