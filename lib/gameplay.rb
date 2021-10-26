@@ -1,4 +1,6 @@
 require './lib/board'
+require './lib/player'
+require './lib/computer'
 
 class Gameplay
   attr_reader :player, :computer
@@ -15,58 +17,72 @@ class Gameplay
 
     if user_input == "p"
       puts "Lets go!"
+      computer.setup
       player.setup
-      play
+      turn
     elsif user_input == "q"
-      end_game
+      exit
     else
       puts "Error: invalid input. Please enter p to play or q to quit."
       start
     end
   end
 
-  def play
-    puts ""
-    puts "Let's play!"
-    puts ""
+  def turn
+    until player.board.ships.all?{|ship| ship.sunk?} || computer.board.ships.all?{|ship| ship.sunk?}
+      valid_shot = false
 
-    end_game = false
+      puts "Enter the coordinate for your shot:"
+      until valid_shot
+        user_input = gets.chomp
+        if computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon? == false
+          valid_shot = true
+        elsif computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon
+          puts "You have already fired on that coordinate. Please choose a coordinate you haven't already fired upon:"
+        else
+          puts "Please enter a valid coordinate:"
+        end
+      end
 
-    until end_game
-      #puts computer.board.render
-      puts player.board.render(true)
+      computer.board.fire_upon(user_input)
 
-      player_shoots
-      # computer_shoots
 
-      if player.game_over?
-        end_game = true
-        puts "Game Over. I won!"
+      shot = player.board.cells.keys.sample
+
+      while player.board.cells[shot].fired_upon?
+        shot = player.board.cells.keys.sample
+      end
+
+      player.board.fire_upon(shot)
+
+      computer.display_board
+      player.display_board
+
+      if computer.board.cells[user_input].render == "X"
+        puts "Your shot on #{user_input} sunk my ship!"
+      elsif computer.board.cells[user_input].render == "H"
+        puts "Your shot on #{user_input} was a hit!"
+      elsif computer.board.cells[user_input].render == "M"
+        puts "Your shot on #{user_input} was a miss."
+      end
+
+      if player.board.cells[shot].render == "X"
+        puts "My shot on #{shot} sunk your ship!"
+      elsif player.board.cells[shot].render == "H"
+        puts "My shot on #{shot} was a hit!"
+      elsif player.board.cells[shot].render == "M"
+        puts "My shot on #{shot} was a miss."
       end
     end
-
-  end
-
-  def player_shoots
-    valid_shot = false
-
-    puts "Enter the coordinate for your shot:"
-    until valid_shot
-      user_input = gets.chomp
-      if player.board.valid_coordinate?(user_input)
-        valid_shot = true
-      else
-        puts "Please enter a valid coordinate:"
-      end
-    end
-
-    # Then we need to shoot the cell
-    player.board.fire_upon(user_input)
+    end_game
   end
 
   def end_game
-    puts "See ya another time."
+    if player.board.ships.all?{|ship| ship.sunk?}
+      puts "I won!"
+    elsif computer.board.ships.all?{|ship| ship.sunk?}
+      puts "You won!"
+    end
     start
   end
-
 end
