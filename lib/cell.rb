@@ -4,10 +4,10 @@ class Cell
   attr_reader :coordinate, :ship, :fired_upon
   attr_accessor :render
 
+  alias_method :fired_upon?, :fired_upon
   def initialize(coordinate)
     @coordinate = coordinate
     @fired_upon = false
-
   end
 
   def empty?
@@ -16,10 +16,6 @@ class Cell
 
   def place_ship(input_ship)
     @ship = input_ship
-  end
-
-  def fired_upon?
-    fired_upon
   end
 
   def fire_upon
