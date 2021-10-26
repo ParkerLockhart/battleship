@@ -20,19 +20,48 @@ class Player
       B . . . .
       C . . . .
       D . . . ."
-    p prompt
-    p ship_placement
+    puts prompt
+    puts ship_placement
   end
 
   def ship_placement
+    cruiser_placed = false
 
-    p "Enter the squares for the Cruiser (3 spaces):"
-    user_placement = gets.to_s.chomp
-    if board.valid_placement? == false
-      p "Invalid placement, try again."
-    else board.valid_placement? == true
-      board.place(@cruiser, user_placement.split)
+    until cruiser_placed
+      puts "Enter the squares for the Cruiser (3 spaces):"
+      user_placement = gets.to_s.chomp # A1 A2 A3
+      ship = Ship.new("Cruiser", 3)
+      coordinates = user_placement.split
+
+      if board.valid_placement?(ship, coordinates)
+        board.place(ship, coordinates)
+        cruiser_placed = true
+      else
+        puts "Invalid placement, try again."
+      end
     end
+
+    puts board.render(true)
+
+    submarine_placed = false
+    until submarine_placed
+      puts "Enter the squares for the Submarine (2 spaces):"
+      user_placement = gets.to_s.chomp # A1 A2 A3
+      ship = Ship.new("Submarine", 2)
+      coordinates = user_placement.split
+
+      if board.valid_placement?(ship, coordinates)
+        board.place(ship, coordinates)
+        submarine_placed = true
+      else
+        puts "Invalid placement, try again."
+      end
+
+      puts "Ready to begin. Your board looks like this:"
+      puts ""
+      puts board.render(true)
+    end
+
 
   end
 
