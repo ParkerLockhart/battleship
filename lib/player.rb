@@ -1,5 +1,5 @@
-require './lib/cell'
 require './lib/ship'
+require './lib/cell'
 require './lib/board'
 require './lib/gameplay'
 
@@ -21,7 +21,7 @@ class Player
       C . . . .
       D . . . ."
     puts prompt
-    puts ship_placement
+    ship_placement
   end
 
   def ship_placement
@@ -39,6 +39,7 @@ class Player
       else
         puts "Invalid placement, try again."
       end
+    end
 
     puts board.render(true)
 
@@ -60,13 +61,10 @@ class Player
       puts ""
       puts board.render(true)
     end
-
-
   end
 
-  def game_over?
-    board.ships.all?{|ship| ship.sunk?}
-    
-  end
-
+  def display_board
+    puts "==============PLAYER BOARD=============="
+    puts board.render(true)
+  end 
 end
