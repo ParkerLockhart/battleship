@@ -92,4 +92,17 @@ RSpec.describe Computer do
       end
     end
   end
+
+  it 'returns a cleared board after a game over' do
+    computer = Computer.new
+    ship = Ship.new('Submarine', 2)
+    cell = 'A1'
+    cell_2 = 'A2'
+
+    computer.board.place(ship, [cell, cell_2])
+    old_ships = computer.board.ships
+    computer.clear_board!
+    new_ships = computer.board.ships
+    expect(new_ships).not_to include(old_ships)
+  end
 end

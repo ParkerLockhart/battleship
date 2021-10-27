@@ -12,7 +12,6 @@ class Computer
     @ships = []
   end
 
-  # TODO: write test
   def clear_board!
     @board = Board.new
   end
