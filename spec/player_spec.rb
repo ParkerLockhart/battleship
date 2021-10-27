@@ -58,4 +58,45 @@ RSpec.describe Player do
       end
     end
   end
+  describe '#cell_status' do
+    context 'hit' do
+      it 'returns the correct symbol' do
+        player = Player.new
+        ship = Ship.new('Submarine', 2)
+        cell = 'A1'
+        cell_2 = 'A2'
+        player.board.place(ship, [cell, cell_2])
+        player.board.fire_upon(cell)
+        actual = player.cell_status(cell)
+        expected = :hit
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context 'sunk' do
+      it 'returns the correct symbol' do
+        player = Player.new
+        ship = Ship.new('Submarine', 2)
+        cell = 'A1'
+        cell_2 = 'A2'
+        player.board.place(ship, [cell, cell_2])
+        player.board.fire_upon(cell)
+        player.board.fire_upon(cell_2)
+        actual = player.cell_status(cell)
+        expected = :sunk
+        expect(actual).to eq(expected)
+      end
+    end
+
+    context 'miss' do
+      it 'returns the correct symbol' do
+        player = Player.new
+        cell = 'A1'
+        player.board.fire_upon(cell)
+        actual = player.cell_status(cell)
+        expected = :miss
+        expect(actual).to eq(expected)
+      end
+    end
+  end
 end

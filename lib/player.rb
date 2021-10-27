@@ -24,6 +24,10 @@ class Player
     ship_placement
   end
 
+  def cell_status(coordinate)
+    board.cell_status(coordinate)
+  end
+
   def all_ships_sunk?
     ships.all? { |ship| ship.sunk? }
   end

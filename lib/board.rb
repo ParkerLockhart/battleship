@@ -28,6 +28,10 @@ class Board
     @ships = []
   end
 
+  def cell_status(coordinate)
+    cells[coordinate].status
+  end
+
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end

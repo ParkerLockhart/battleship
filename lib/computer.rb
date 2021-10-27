@@ -21,6 +21,10 @@ class Computer
     ships.all? { |ship| ship.sunk? }
   end
 
+  def cell_status(coordinate)
+    board.cell_status(coordinate)
+  end
+
   def setup_cruiser
     horiz = [%w[A1 A2 A3], %w[A2 A3 A4], %w[B1 B2 B3], %w[B2 B3 B4], %w[C1 C2 C3],
              %w[C2 C3 C4], %w[D1 D2 D3], %w[D2 D3 D4]]

@@ -3,6 +3,7 @@ require './lib/player'
 require './lib/computer'
 
 class Gameplay
+  InvalidShotError = Class.new(StandardError)
   attr_reader :player, :computer
 
   def initialize
@@ -63,20 +64,26 @@ class Gameplay
       computer.display_board
       player.display_board
 
-      if computer.board.cells[user_input].render == 'X'
+      case computer.cell_status(user_input)
+      when :sunk
         puts "Your shot on #{user_input} sunk my ship!"
-      elsif computer.board.cells[user_input].render == 'H'
+      when :hit
         puts "Your shot on #{user_input} was a hit!"
-      elsif computer.board.cells[user_input].render == 'M'
+      when :miss
         puts "Your shot on #{user_input} was a miss."
+      else
+        raise InvalidShotError
       end
 
-      if player.board.cells[shot].render == 'X'
+      case player.cell_status(shot)
+      when :sunk
         puts "My shot on #{shot} sunk your ship!"
-      elsif player.board.cells[shot].render == 'H'
+      when :hit
         puts "My shot on #{shot} was a hit!"
-      elsif player.board.cells[shot].render == 'M'
+      when :miss
         puts "My shot on #{shot} was a miss."
+      else
+        raise InvalidShotError
       end
     end
     end_game
