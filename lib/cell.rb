@@ -4,7 +4,7 @@ class Cell
   attr_reader :coordinate, :ship, :fired_upon
   attr_accessor :render
 
-  alias_method :fired_upon?, :fired_upon
+  alias fired_upon? fired_upon
   def initialize(coordinate)
     @coordinate = coordinate
     @fired_upon = false
@@ -25,15 +25,15 @@ class Cell
 
   def render(reveal = false)
     if ship && ship.sunk?
-      "X"
+      'X'
     elsif fired_upon && ship
-      "H"
+      'H'
     elsif fired_upon
-      "M"
+      'M'
     elsif ship && reveal
-      "S"
+      'S'
     else
-      "."
+      '.'
     end
   end
 end

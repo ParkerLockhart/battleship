@@ -33,7 +33,7 @@ class Player
 
     until cruiser_placed
       puts 'Enter the squares for the Cruiser (3 spaces):'
-      user_placement = gets.to_s.chomp # A1 A2 A3
+      user_placement = gets.to_s.chomp
       ship = Ship.new('Cruiser', 3)
       coordinates = user_placement.split
 
@@ -51,7 +51,7 @@ class Player
     submarine_placed = false
     until submarine_placed
       puts 'Enter the squares for the Submarine (2 spaces):'
-      user_placement = gets.to_s.chomp # A1 A2 A3
+      user_placement = gets.to_s.chomp
       ship = Ship.new('Submarine', 2)
       coordinates = user_placement.split
 
