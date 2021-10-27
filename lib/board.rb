@@ -98,25 +98,15 @@ class Board
   end
 
   def render(reveal = false)
-     rendered = "  1 2 3 4 "
-     if reveal
-       @cells.each_value do |cell|
-         rendered += (cell.render(true) + " ")
-      end
-       rendered.insert(10, "\nA ")
-       rendered.insert(21, "\nB ")
-       rendered.insert(32, "\nC ")
-       rendered.insert(43, "\nD ")
-       rendered.insert(54, "\n")
-    else
-      @cells.each_value do |cell|
-        rendered += (cell.render + " ")
-      end
-      rendered.insert(10, "\nA ")
-      rendered.insert(21, "\nB ")
-      rendered.insert(32, "\nC ")
-      rendered.insert(43, "\nD ")
-      rendered.insert(54, "\n")
-    end
+    rendered = '  1 2 3 4 '
+
+    rendered += @cells.each_value.map do |cell|
+      cell.render(reveal)
+    end.join(' ')
+    rendered.insert(10, "\nA ")
+    rendered.insert(21, "\nB ")
+    rendered.insert(32, "\nC ")
+    rendered.insert(43, "\nD ")
+    rendered += " \n"
   end
 end
