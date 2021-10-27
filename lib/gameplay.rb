@@ -108,9 +108,9 @@ class Gameplay
   end
 
   def end_game
-    if player.board.ships.all? { |ship| ship.sunk? }
+    if player.all_ships_sunk?
       puts 'I won!'
-    elsif computer.board.ships.all? { |ship| ship.sunk? }
+    elsif computer.all_ships_sunk?
       puts 'You won!'
     end
     clear_boards!
