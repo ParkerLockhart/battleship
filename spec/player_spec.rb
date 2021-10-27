@@ -97,4 +97,17 @@ RSpec.describe Player do
       end
     end
   end
+
+  it 'returns a cleared board after a game over' do
+    player = Player.new
+    ship = Ship.new('Submarine', 2)
+    cell = 'A1'
+    cell_2 = 'A2'
+
+    player.board.place(ship, [cell, cell_2])
+    old_ships = player.board.ships
+    player.clear_board!
+    new_ships = player.board.ships
+    expect(new_ships).not_to include(old_ships)
+  end
 end

@@ -29,7 +29,6 @@ class Player
     ship_placement
   end
 
-  # TODO: write test
   def clear_board!
     @board = Board.new
   end
