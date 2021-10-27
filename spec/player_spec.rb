@@ -31,8 +31,8 @@ RSpec.describe Player do
     context 'when ships are not sunk' do
       it 'reports that all the ships are not sunk' do
         player = Player.new
-        ship_1 = Ship.new('Cruiser', 3)
-        player.ships << ship_1
+        ship_with_health = Ship.new('Cruiser', 3)
+        player.ships << ship_with_health
         actual = player.all_ships_sunk?
         expected = false
         expect(actual).to eq(expected)
@@ -41,8 +41,8 @@ RSpec.describe Player do
     context 'when ships are sunk' do
       it 'reports that all the ships are sunk' do
         player = Player.new
-        ship_1 = Ship.new('Cruiser', 0)
-        player.ships << ship_1
+        ship_with_no_health = Ship.new('Cruiser', 0)
+        player.ships << ship_with_no_health
         actual = player.all_ships_sunk?
         expected = true
         expect(actual).to eq(expected)
