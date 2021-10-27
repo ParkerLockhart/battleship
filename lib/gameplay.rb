@@ -37,16 +37,29 @@ class Gameplay
     'Enter p to play. Enter q to quit.'
   end
 
+  # TODO: test these three methods
+  def game_over?
+    player.all_ships_sunk? || computer.all_ships_sunk?
+  end
+
+  def valid_shot?(user_input)
+    computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon? == false
+  end
+
+  def repeat_shot?(user_input)
+    computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon
+  end
+
   def turn
-    until player.all_ships_sunk? || computer.all_ships_sunk?
+    until game_over?
       valid_shot = false
 
       puts 'Enter the coordinate for your shot:'
       until valid_shot
         user_input = gets.chomp
-        if computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon? == false
+        if valid_shot?(user_input)
           valid_shot = true
-        elsif computer.board.valid_coordinate?(user_input) && computer.board.cells[user_input].fired_upon
+        elsif repeat_shot?(user_input)
           puts "You have already fired on that coordinate. Please choose a coordinate you haven't already fired upon:"
         else
           puts 'Please enter a valid coordinate:'
