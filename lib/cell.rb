@@ -26,16 +26,6 @@ class Cell
     ship.hit if ship
   end
 
-  def status
-    if ship && ship.sunk?
-      :sunk
-    elsif fired_upon && ship
-      :hit
-    elsif fired_upon
-      :miss
-    end
-  end
-
   def render(reveal = false)
     if ship && ship.sunk?
       'X'
