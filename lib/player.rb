@@ -11,16 +11,21 @@ class Player
     @ships = []
   end
 
-  def setup
-    puts 'I have laid out my ships on the grid.'
-    puts 'You now need to lay out your two ships.'
-    puts "The Cruiser is three units long and the Submarine is two units long.
-        1 2 3 4
-      A . . . .
-      B . . . .
-      C . . . .
-      D . . . ."
+  def setup_message
+    <<~MSG
+      I have laid out my ships on the grid.
+      You now need to lay out your two ships.
+      The Cruiser is three units long and the Submarine is two units long.
+          1 2 3 4
+        A . . . .
+        B . . . .
+        C . . . .
+        D . . . .
+    MSG
+  end
 
+  def setup
+    puts setup_message
     ship_placement
   end
 
