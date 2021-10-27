@@ -89,12 +89,18 @@ class Gameplay
     end_game
   end
 
+  def clear_boards!
+    player.clear_board!
+    computer.clear_board!
+  end
+
   def end_game
     if player.board.ships.all? { |ship| ship.sunk? }
       puts 'I won!'
     elsif computer.board.ships.all? { |ship| ship.sunk? }
       puts 'You won!'
     end
+    clear_boards!
     start
   end
 end
