@@ -3,7 +3,6 @@ require './lib/player'
 require './lib/computer'
 
 class Gameplay
-  InvalidShotError = Class.new(StandardError)
   attr_reader :player, :computer
 
   def initialize
@@ -96,7 +95,6 @@ class Gameplay
       when :miss
         puts "My shot on #{shot} was a miss."
       else
-        raise InvalidShotError
       end
     end
     end_game
