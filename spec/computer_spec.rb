@@ -52,47 +52,7 @@ RSpec.describe Computer do
     end
   end
 
-  describe '#cell_status' do
-    context 'hit' do
-      it 'returns the correct symbol' do
-        computer = Computer.new
-        cell = 'A1'
-        cell_2 = 'A2'
-        computer.board.place(computer.submarine, [cell, cell_2])
-        computer.board.fire_upon(cell)
-        actual = computer.cell_status(cell)
-        expected = :hit
-        expect(actual).to eq(expected)
-      end
-    end
-
-    context 'sunk' do
-      it 'returns the correct symbol' do
-        computer = Computer.new
-        cell = 'A1'
-        cell_2 = 'A2'
-        computer.board.place(computer.submarine, [cell, cell_2])
-        computer.board.fire_upon(cell)
-        computer.board.fire_upon(cell_2)
-        actual = computer.cell_status(cell)
-        expected = :sunk
-        expect(actual).to eq(expected)
-      end
-    end
-
-    context 'miss' do
-      it 'returns the correct symbol' do
-        computer = Computer.new
-        cell = 'A1'
-        computer.board.fire_upon(cell)
-
-        actual = computer.cell_status(cell)
-        expected = :miss
-        expect(actual).to eq(expected)
-      end
-    end
-  end
-
+  
   it 'returns a cleared board after a game over' do
     computer = Computer.new
     ship = Ship.new('Submarine', 2)
