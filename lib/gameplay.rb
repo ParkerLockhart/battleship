@@ -29,7 +29,7 @@ class Gameplay
   end
 
   def turn
-    until player.board.ships.all?{|ship| ship.sunk?} || computer.board.ships.all?{|ship| ship.sunk?}
+    until player.all_ships_sunk? || computer.all_ships_sunk?
       valid_shot = false
 
       puts "Enter the coordinate for your shot:"
