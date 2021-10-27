@@ -76,27 +76,33 @@ class Gameplay
       computer.display_board
       player.display_board
 
-      case computer.cell_status(user_input)
-      when :sunk
+      if computer.board.cells[user_input].render == "X"
+        
         puts "Your shot on #{user_input} sunk my ship!"
-      when :hit
+        
+      elsif computer.board.cells[user_input].render == "H"
+        
         puts "Your shot on #{user_input} was a hit!"
-      when :miss
+        
+      elsif computer.board.cells[user_input].render == "M"
+        
         puts "Your shot on #{user_input} was a miss."
-      else
-        raise InvalidShotError
       end
 
-      case player.cell_status(shot)
-      when :sunk
+      if player.board.cells[shot].render == "X"
+        
         puts "My shot on #{shot} sunk your ship!"
-      when :hit
+        
+      elsif player.board.cells[shot].render == "H"
+        
         puts "My shot on #{shot} was a hit!"
-      when :miss
+        
+      elsif player.board.cells[shot].render == "M"
+        
         puts "My shot on #{shot} was a miss."
-      else
       end
-    end
+    end    
+
     end_game
   end
 
